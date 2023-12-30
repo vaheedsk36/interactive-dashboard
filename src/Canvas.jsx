@@ -1,13 +1,15 @@
 import { useRef, useState } from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
-// import { Button } from "antd";
+import { ColorPicker } from "antd";
 import { MdCleaningServices } from "react-icons/md";
 import { FaPen, FaEraser, FaUndo, FaRedo } from "react-icons/fa";
 import { RxReset } from "react-icons/rx";
 
 const Canvas = () => {
   const canvasRef = useRef(null);
-  const [toolPointer, setToolPointer] = useState("pointer");
+  const [toolPointer, setToolPointer] = useState("pen-pointer");
+  const [color, setColor] = useState("#000000");
+
   const canvasActions = (action, mode = false) => {
     canvasRef.current[action](action === "eraseMode" ? mode : null);
     setToolPointer(
@@ -18,6 +20,14 @@ const Canvas = () => {
         : "cross-hair"
     );
   };
+
+  const ToolPallet = ()=>{
+    return <ColorPicker
+    value={color}
+    onChangeComplete={(color) => setColor(color.toHexString())}
+  />;
+    }
+
   const CanvasToolbar = () => (
     <div className="canvas-container fs-5 d-inline my-3 card shadow-sm rounded">
       <MdCleaningServices
@@ -35,8 +45,10 @@ const Canvas = () => {
       <FaPen onClick={() => canvasActions("eraseMode", false)} title="pen" />
       <FaUndo onClick={() => canvasActions("undo")} title="undo" />
       <FaRedo onClick={() => canvasActions("redo")} title="redo" />
+      <ToolPallet/>
     </div>
   );
+
   return (
     <div className="container text-center">
       <div className="row">
@@ -45,11 +57,10 @@ const Canvas = () => {
       <div className={`row ${toolPointer}`}>
         <ReactSketchCanvas
           ref={canvasRef}
-          // style={styles}
           width="80vw"
           height="80vh"
           strokeWidth={4}
-          strokeColor="red"
+          strokeColor={color}
         />
       </div>
     </div>
