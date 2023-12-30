@@ -1,0 +1,20 @@
+
+.row > .canvas-container{
+  width: 20rem;
+}
+.canvas-container > svg{
+  margin: 10px;
+  cursor: pointer;
+}
+
+.cross-hair{
+  cursor:crosshair
+}
+
+.pen-pointer{
+  cursor: crosshair;
+}
+
+.eraser-pointer{
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAASNJREFUOE/dVDGOgzAQNA8AUbgnV7i/EzxgeQBFCiqqe0JeALzgnpCKiiIFD8APAN31LhJ6Fwg+EBZhKeIMClGUIitZSNZqmJmdtUGeXMaT8ch7AMJkC375dBadWpMMlNIfx3F2pmnaAECKomi7rmuFEN9LwEuAyKYsy5Ig0G2laUqSJMErXweqBWSMnaMo2sVxrJXGOSdhGP5JKb/mDTpAcF33VFWVvRYpz/Pauq73c5Y6wEFREi+xUz/xfZ9wzv/J1jIEgNG/tZq8TIee0VBVL5FMKKW/eZ5/ziesWCC7LMsuQoiPe4aCPWNsMB5zL3HC6N+m2KjNYIwdLcuygyCwEajv+7ZpmouU8rA12LdKkK1aO7zH9Xto9R562d7j+dok/Qo5sGkVPRD60AAAAABJRU5ErkJggg==") 10 10, auto
+}
