@@ -9,6 +9,7 @@ const Canvas = () => {
   const canvasRef = useRef(null);
   const [toolPointer, setToolPointer] = useState("pen-pointer");
   const [color, setColor] = useState("#000000");
+  const [allowOnlyPointer,setAllowOnlyPointer] = useState("pen");
 
   const canvasActions = (action, mode = false) => {
     canvasRef.current[action](action === "eraseMode" ? mode : null);
@@ -19,6 +20,7 @@ const Canvas = () => {
           : "pen-pointer"
         : "cross-hair"
     );
+    setAllowOnlyPointer(action === "eraseMode" ? "all" : "pen")
   };
 
   const ToolPallet = ()=>{
@@ -29,7 +31,7 @@ const Canvas = () => {
     }
 
   const CanvasToolbar = () => (
-    <div className="canvas-container fs-5 d-inline my-3 card shadow-sm rounded">
+    <div className="canvas-container fs-5 d-inline my-3 card shadow-sm rounded-pill">
       <MdCleaningServices
         onClick={() => canvasActions("clearCanvas")}
         title="clear canvas"
@@ -51,16 +53,18 @@ const Canvas = () => {
 
   return (
     <div className="container text-center">
-      <div className="row">
+      <div className="row justify-content-center" style={{marginRight:"11rem"}}>
         <CanvasToolbar />
       </div>
       <div className={`row ${toolPointer}`}>
         <ReactSketchCanvas
+        className="bg-white rounded-0"
           ref={canvasRef}
-          width="80vw"
+          width="75vw"
           height="80vh"
           strokeWidth={4}
           strokeColor={color}
+          allowOnlyPointerType={allowOnlyPointer}
         />
       </div>
     </div>

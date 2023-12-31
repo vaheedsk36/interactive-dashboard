@@ -2,7 +2,9 @@
 .row > .canvas-container{
   width: 20rem;
 }
-.canvas-container > svg{
+
+.canvas-container > svg,
+.canvas-container > .ant-color-picker-trigger {
   margin: 10px;
   cursor: pointer;
 }

@@ -1,31 +1,31 @@
-import { Layout, Menu } from 'antd';
-import PropTypes from 'prop-types';
+import { Layout, Menu } from "antd";
+import PropTypes from "prop-types";
+import VideoGrid from "./VideoGrid";
 
-const { Header, Footer } = Layout;
+const { Header } = Layout;
 
 const items = new Array(15).fill(null).map((_, index) => ({
   key: index + 1,
   label: `nav ${index + 1}`,
 }));
 
-const DashboardLayout = ({children}) => {
-
+const DashboardLayout = ({ children }) => {
   return (
     <Layout>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+      <Header style={{ display: "flex", alignItems: "center" }}>
         <div className="demo-logo" />
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={["2"]}
           items={items}
           style={{ flex: 1, minWidth: 0 }}
         />
       </Header>
-      {
-            children
-          }
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+      <div className="row gx-1">
+        <div className="col">{children}</div>
+        <VideoGrid/>
+      </div>
     </Layout>
   );
 };
