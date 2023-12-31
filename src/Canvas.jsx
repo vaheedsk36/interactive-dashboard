@@ -4,12 +4,14 @@ import { ColorPicker } from "antd";
 import { MdCleaningServices } from "react-icons/md";
 import { FaPen, FaEraser, FaUndo, FaRedo } from "react-icons/fa";
 import { RxReset } from "react-icons/rx";
+import { Radio } from "antd";
 
 const Canvas = () => {
   const canvasRef = useRef(null);
   const [toolPointer, setToolPointer] = useState("pen-pointer");
   const [color, setColor] = useState("#000000");
-  const [allowOnlyPointer,setAllowOnlyPointer] = useState("pen");
+  const [allowOnlyPointer, setAllowOnlyPointer] = useState("pen");
+  const [canvasZoom, setCanvasZoom] = useState(100);
 
   const canvasActions = (action, mode = false) => {
     canvasRef.current[action](action === "eraseMode" ? mode : null);
@@ -20,18 +22,20 @@ const Canvas = () => {
           : "pen-pointer"
         : "cross-hair"
     );
-    setAllowOnlyPointer(action === "eraseMode" ? "all" : "pen")
+    setAllowOnlyPointer(action === "eraseMode" ? "all" : "pen");
   };
 
-  const ToolPallet = ()=>{
-    return <ColorPicker
-    value={color}
-    onChangeComplete={(color) => setColor(color.toHexString())}
-  />;
-    }
+  const ToolPallet = () => {
+    return (
+      <ColorPicker
+        value={color}
+        onChangeComplete={(color) => setColor(color.toHexString())}
+      />
+    );
+  };
 
   const CanvasToolbar = () => (
-    <div className="canvas-container fs-5 d-inline my-3 card shadow-sm rounded-pill">
+    <div className="canvas-container fs-5 d-inline my-3 card shadow-sm rounded">
       <MdCleaningServices
         onClick={() => canvasActions("clearCanvas")}
         title="clear canvas"
@@ -47,25 +51,55 @@ const Canvas = () => {
       <FaPen onClick={() => canvasActions("eraseMode", false)} title="pen" />
       <FaUndo onClick={() => canvasActions("undo")} title="undo" />
       <FaRedo onClick={() => canvasActions("redo")} title="redo" />
-      <ToolPallet/>
+      <ToolPallet />
     </div>
   );
 
   return (
-    <div className="container text-center">
-      <div className="row justify-content-center" style={{marginRight:"11rem"}}>
+    <div>
+      <div
+        className="d-flex"
+        style={{ position: "absolute", zIndex: "10", left: "28rem" }}
+      >
         <CanvasToolbar />
       </div>
-      <div className={`row ${toolPointer}`}>
+      <div
+        className={`${toolPointer}`}
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: "-1",
+          transform: `scale(${canvasZoom / 100})` 
+        }}
+
+      >
         <ReactSketchCanvas
-        className="bg-white rounded-0"
+          className="bg-white rounded-0"
           ref={canvasRef}
-          width="75vw"
-          height="80vh"
           strokeWidth={4}
           strokeColor={color}
           allowOnlyPointerType={allowOnlyPointer}
         />
+      </div>
+      <div
+        className="d-inline"
+        style={{
+          position: "absolute",
+          bottom: "1rem",
+          left: "1rem",
+          zIndex: "10",
+        }}
+      >
+        <div>
+          <Radio.Group
+            value={canvasZoom}
+            onChange={(e) => setCanvasZoom(e.target.value)}
+          >
+            <Radio.Button value={canvasZoom + 10}>+</Radio.Button>
+            <Radio.Button value={100}>{canvasZoom}</Radio.Button>
+            <Radio.Button value={canvasZoom === 10 ? 10 : canvasZoom - 10}>-</Radio.Button>
+          </Radio.Group>
+        </div>
       </div>
     </div>
   );
