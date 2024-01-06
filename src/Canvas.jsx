@@ -54,24 +54,24 @@ const Canvas = () => {
   );
 
   return (
-    <div>
-      {/* <div
-        className="d-flex justify-content-center"
-        style={{ position: "absolute", zIndex: "10", left: "35rem" }}
-      >
-        <CanvasToolbar />
-      </div> */}
+    <div style={{ position: "absolute", zIndex: "1", inset: 0, top: "1rem" }}>
       <div
-        className={`${toolPointer}`}
+        className="d-flex justify-content-center"
         style={{
           position: "absolute",
-          inset: 0,
-          zIndex: "-1"
+          zIndex: 5,
+          left: "30rem",
+          top: "1.8rem",
         }}
-
+      >
+        <CanvasToolbar />
+      </div>
+      <div
+        className={`${toolPointer}`}
+        style={{ position: "absolute", zIndex: "-1", inset: 0 }}
       >
         <ReactSketchCanvas
-          className="bg-white rounded-0"
+          className="bg-danger rounded-0"
           ref={canvasRef}
           strokeWidth={4}
           strokeColor={color}

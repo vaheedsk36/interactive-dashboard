@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }) => {
     <Layout style={layoutStyle}>
       <DashboardHeader className="" style={headerStyle} activeUsers={activeUsers} />
         <Content width="70%">{children}</Content>
-        <Sider width='18%' style={{ height:'100vh'}}>
+        <Sider width='18%' style={{ height:'100vh',zIndex:5}}>
           <VideoGrid {...{ activeUsers }} />
         </Sider>
     </Layout>
