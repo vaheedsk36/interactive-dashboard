@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 .cross-hair{
   cursor:crosshair
 }

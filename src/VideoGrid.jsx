@@ -1,6 +1,7 @@
-//TODO: sample video grid
+import PropTypes from "prop-types";
 
-const VideoGrid = () => {
+
+const VideoGrid = ({activeUsers}) => {
 
     const VideoCard = ()=>{
         return(
@@ -22,13 +23,17 @@ const VideoGrid = () => {
       }}
     >
         {
-            Array(5).fill(null).map((_,index)=>{
+            activeUsers.map((_,index)=>{
                 return <VideoCard key={index}/>
             })
         }
 
     </div>
   );
+};
+
+VideoGrid.propTypes = {
+  activeUsers: PropTypes.array,
 };
 
 export default VideoGrid;
