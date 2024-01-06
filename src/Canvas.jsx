@@ -55,12 +55,12 @@ const Canvas = () => {
 
   return (
     <div>
-      <div
-        className="d-flex"
-        style={{ position: "absolute", zIndex: "10", left: "28rem" }}
+      {/* <div
+        className="d-flex justify-content-center"
+        style={{ position: "absolute", zIndex: "10", left: "35rem" }}
       >
         <CanvasToolbar />
-      </div>
+      </div> */}
       <div
         className={`${toolPointer}`}
         style={{
