@@ -28,6 +28,7 @@ const Canvas = () => {
       <ColorPicker
         value={color}
         onChangeComplete={(color) => setColor(color.toHexString())}
+        size="small"
       />
     );
   };
